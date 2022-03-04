@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import EventsList from './components/EventsList';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {useState} from 'react'
+import Main from './components/Main'
+import MainAgain from './components/MainAgain';
 
-function App() {
+
+const App =()=> { 
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div onClick={()=>console.log("i am inside")}>
+      Click me to check   
+      <Main/> 
     </div>
+
+    // <div>
+    //   {console.log(signedIn)}
+    //   {!signedIn ? <Login change ={setSignedIn } signedIn ={signedIn}/> : <Logout change ={setSignedIn}  signedIn ={signedIn}/>} 
+    // </div>
+    // <BrowserRouter>
+    //     <Switch>
+    //       <Route path="/events">
+    //         <EventsList/>
+    //       </Route>
+    //       <Route exact path="/">
+    //         <Main/>
+    //       </Route>
+    //     </Switch>
+    //   </BrowserRouter>
+
   );
 }
 
 export default App;
+
+
