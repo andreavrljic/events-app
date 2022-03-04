@@ -3,7 +3,6 @@ import EventsList from './components/EventsList';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {useState} from 'react'
 import Main from './components/Main'
-import MainAgain from './components/MainAgain';
 
 
 const App =()=> { 

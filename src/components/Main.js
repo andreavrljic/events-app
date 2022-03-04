@@ -6,6 +6,14 @@ import Header from './Header'
 import './Main.css'
 
 
+function useForceUpdate(data){
+
+  const [trying, setTrying] = useState([]); 
+  return () => setTrying(data)
+
+}
+
+
 const Main = () => {
 
 var gapi = window.gapi
@@ -13,6 +21,8 @@ var gapi = window.gapi
 const [signedIn, setSignedIn] = useState(false);
 const [accessToken, setAccessToken] = useState('');
 const [events, setEvents] = useState([])
+const forceUpdate = useForceUpdate(); 
+
 const calendarId="primary";
 
 const onFailure = () => {
@@ -90,6 +100,7 @@ const listOfEvents = (numDays) => {
                   if (data?.items) {
                     console.log(data);
                     setEvents(data)
+                    // forceUpdate(data)
                   }
                 });
         })
@@ -116,10 +127,10 @@ const listOfEvents = (numDays) => {
     // return data
 }
 
-const deleteEvent =(eventId) => {
+const deleteEvent = async (eventId) => {
 console.log("dELETING" , eventId )
   if (window.gapi.client || localStorage.getItem("accessToken")) {
-      fetch(
+      await fetch(
         `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}?key=${key.API_KEY}`,
         {
           method: "DELETE",
@@ -131,16 +142,17 @@ console.log("dELETING" , eventId )
       .then(res => console.log(res))
       ;
   }
+  listOfEvents();
 
 }
 
 
-const addEvent = (newItem) => {
-  console.log(newItem.summary)
+const addEvent = async (newItem) => {
+  // console.log(newItem.summary)
     if (window.gapi.client || localStorage.getItem("accessToken")) {
       let today = new Date();
 
-        fetch(
+        await fetch(
           `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${key.API_KEY}`,
           {
             method: "POST",
@@ -151,14 +163,14 @@ const addEvent = (newItem) => {
              JSON.stringify({
               end: {
                 // dateTime: new Date("Apr 20, 2022"),
-                dateTime: '2022-04-4T19:00:00.000Z',
+                dateTime: '2022-03-6T19:00:00.000Z',
               },
               start: {
-                dateTime: '2022-04-4T18:00:00.000Z',
+                dateTime: '2022-03-6T18:00:00.000Z',
                 // dateTime: new Date("Apr 20, 2022"),
 
               },
-              summary: newItem.summary,
+              summary: newItem,
               location: '800 Howard St., San Francisco, CA 94103',
             }),
           }
@@ -166,6 +178,7 @@ const addEvent = (newItem) => {
         .then(res => console.log(res))
         ;
     }
+    listOfEvents();
  
   };
 
@@ -186,22 +199,14 @@ return (
                       <button onClick={renderProps.onClick}
                       className="button"
                       >
-                          LOGIN</button>
+                      LOGIN</button>
                     )}
                 />
                 </div>
             :
             <div>
               <Header logout={onSuccessLogut} addEvent={addEvent}/>
-              <div>
-                {/* <GoogleLogout
-                clientId={key.CLIENT_ID}
-                buttonText='LOGOUT'
-                onLogoutSuccess={() => onSuccessLogut()}
-                /> */}
-                {/* <div onClick={() => listOfEvents()}> click me!</div>
-                <div onClick={()=>addEvent()}>add event </div> */}
-              </div>
+
               <EventsList 
                             events ={events}
                             listOfEvents ={() => listOfEvents()}
