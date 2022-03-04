@@ -1,0 +1,29 @@
+.header {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    background-color:  rgb(247, 95, 72);
+    height: 80px;
+    width: fill;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    flex-wrap: wrap;
+    align-content: center;
+    min-width:max-content;
+    
+}
+
+.headerContainer{
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    
+}
+
+.button{
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+}

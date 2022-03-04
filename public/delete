@@ -1,0 +1,7 @@
+DELETE https://www.googleapis.com/calendar/v3/calendars/[CALENDARID]/events/[EVENTID]?key=[YOUR_API_KEY] HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json
+
+"7iooaaeh9ht47f00v3ccqibfh0"
+"k56tudc54uje8btdrak3tlvj68"

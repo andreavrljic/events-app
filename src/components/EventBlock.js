@@ -1,11 +1,14 @@
 
-import { useState,useEffect } from "react"
+import { useState } from "react"
 import './EventBlock.css'
+import {FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarMinus} from "@fortawesome/free-regular-svg-icons";
 
 const EventBlock  = (props) => {
 
    let event = props.eventDetails;
-   console.log(props.data.events.items)
+//    const [a,setA] = useState(props.data)
+
     const setDate =(date)=>{
 
         let d = new Date().toISOString();
@@ -24,9 +27,12 @@ const EventBlock  = (props) => {
 
     return (
         <div className="rowEvent" id={props.id}>
-            {/* <div className="summary">{event.summary}</div>
+            {console.log(event.start.dateTime)}
+            <div className="summary">{event.summary}</div>
             <div className="startDate"> {setDate(event.start.dateTime)}</div>
-            <div className="endDate">{setDate(event.end.dateTime)}</div> */}
+            <div className="endDate">{setDate(event.end.dateTime)}</div>
+            <FontAwesomeIcon className ="deleteIcon" icon={faCalendarMinus} onClick={() => props.deleteEvent(event.id)} />
+
         </div>
     )
 }
