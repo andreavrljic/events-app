@@ -11,6 +11,13 @@ const NewEvent = (props) => {
     const [timeStart, setTimeStart] = useState(today);
     const [timeEnd, setTimeEnd] = useState(today);
 
+    const clearState =()=> {
+        setSummary(''); 
+        setTimeStart(new Date()); 
+        setTimeEnd(new Date())
+
+    }
+
     return (
         <div className="form-group">
             <label className="label">Event name</label>
@@ -40,8 +47,7 @@ const NewEvent = (props) => {
             />
            
             <Button className="button save" 
-            onClick={() =>props.addEvent({summary, timeStart, timeEnd})}>SAVE</Button>
-            {/* <Button className="button save" onClick={() => props.closeAddingEvent()}>CLOSE</Button> */}
+            onClick={() =>{clearState() ; props.addEvent({summary, timeStart, timeEnd})}}>SAVE</Button>
         </div>
 
     )

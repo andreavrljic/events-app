@@ -22,6 +22,7 @@ const Main = () => {
   const [accessToken, setAccessToken] = useState('');
   const [events, setEvents] = useState([])
   const forceUpdate = useForceUpdate();
+  const [defaultDays, setDefaultDays] = useState(7); 
 
   const calendarId = "primary";
 
@@ -36,14 +37,11 @@ const Main = () => {
     if (e.accessToken) {
       setSignedIn(true);
       setAccessToken(e.accessToken)
-      // console.log(e)
       window.localStorage.setItem("userName", e.profileObj.familyName + " " + e.profileObj.givenName)
       window.localStorage.setItem("userEmail", e.profileObj.email)
       window.localStorage.setItem("accessToken", e.accessToken)
       // history.push("/events")
       listOfEvents()
-
-      // console.log("end a", events)
     }
 
 
@@ -73,7 +71,7 @@ const Main = () => {
 
   const listOfEvents = (numDays) => {
 
-    let defaultDays = 7;
+    if(numDays) setDefaultDays(numDays)
     let today = new Date().toISOString();
     const timeZone = "timeZone=Europe%2FBelgrade"
     let maxDays = addDays(numDays ? numDays : defaultDays)
@@ -127,8 +125,6 @@ const Main = () => {
   const addEvent = async (eventInfo) => {
 
     if (window.gapi.client || localStorage.getItem("accessToken")) {
-      let today = new Date();
-
       await fetch(
         `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${key.API_KEY}`,
         {
@@ -149,7 +145,11 @@ const Main = () => {
             }),
         }
       )
-        .then(res => console.log(res))
+        .then(res => {
+          if(!res.ok){
+            alert("Invalid input! Be careful with time AM and PM.")
+            console.log(res)}
+          })
         ;
       listOfEvents();
     }
@@ -185,7 +185,8 @@ const Main = () => {
               events={events}
               listOfEvents={(days) => listOfEvents(days)}
               addEvent={(eventInfo) => addEvent(eventInfo)}
-              deleteEvent={(e) => deleteEvent(e)} />
+              deleteEvent={(e) => deleteEvent(e)} 
+              defaultDays={defaultDays}/>
           </div>
       }
 

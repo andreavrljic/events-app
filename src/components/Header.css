@@ -21,12 +21,6 @@
     
 }
 
-.button{
-    background-color: whitesmoke;
-    color: black;
-    border-radius: 5px;
-    padding: 10px;
-}
 
 .form-group{
     align-content: center;
@@ -44,8 +38,15 @@
     min-width:fit-content; 
     margin: 5px;
     text-align: center;
+    font-weight: 500;
 }
 
 .save{
     margin-right: 10px;
+}
+
+.headerLabel{
+    color: whitesmoke; 
+    text-shadow: 2px 2px 6px black;
+
 }

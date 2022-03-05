@@ -8,30 +8,61 @@ import './EventsList.css'
 
 const EventsList = (props) => {
 
+    let currentWeekNumber = require('current-week-number');
+    let uniqueDays;
+    let uniqueWeeks;
     const removeFromCalendar = (eventId) => {
 
         props.deleteEvent(eventId);
     }
 
     const createDataList = (elementList) => {
-        console.log(elementList.items)
-        return elementList.items?.map((element) => { return <EventBlock eventDetails={element} key={element.id} deleteEvent={removeFromCalendar} /> })
+        let currentList = elementList.items;
+        if (props.defaultDays != 30) {
+
+            uniqueDays = [...new Set(currentList?.map(item => new Date(item.start.dateTime).toLocaleDateString()))]
+
+            return uniqueDays.map((day) => {
+                return <div key={day}>
+                    <h3 className="tableLabel">{new Date(day).toLocaleDateString("de-DE")}</h3>
+                    {currentList?.map(element => {
+                        if (new Date(element.start.dateTime).toLocaleDateString() == day)
+                            return <EventBlock eventDetails={element} key={element.id} deleteEvent={removeFromCalendar} />
+
+                    })}
+                </div>
+            })
+        } else {
+   
+
+            uniqueWeeks = [...new Set(currentList?.map(item => currentWeekNumber(new Date(item.start.dateTime))))]
+     
+            return uniqueWeeks.map((week) => {
+                return <div key = {week}>
+                   <h3 className="tableLabel">Week no.{week}</h3>
+                {currentList?.map(element => {
+                    if(currentWeekNumber(new Date(element.start.dateTime))==week)
+                        return <EventBlock eventDetails={element} key={element.id} deleteEvent={removeFromCalendar} /> 
+                })}
+                </div>
+
+            })
+        }
+
     }
 
     return (
         <div className="tableContainer">
-            <NewEvent addEvent={(eventInfo)=>props.addEvent(eventInfo)} />
+            <NewEvent addEvent={(eventInfo) => props.addEvent(eventInfo)} />
             <ButtonGroup variant="outlined" aria-label="outlined button group">
-                <Label>Select</Label>
-                <Button className="button" onClick ={() => {props.listOfEvents(1)}}>1</Button>
-                <Button className="button" onClick ={() => {props.listOfEvents(7)}}>7</Button>
-                <Button className="button" onClick ={() => {props.listOfEvents(30)}}>30</Button>
+                <Button className="buttonSmall" onClick={() => { props.listOfEvents(1) }}>1</Button>
+                <Button className="buttonSmall" onClick={() => { props.listOfEvents(7) }}>7</Button>
+                <Button className="buttonSmall" onClick={() => { props.listOfEvents(30) }}>30</Button>
             </ButtonGroup>
             <div className='tableList'>
-                <div>Datum</div>
                 {createDataList(props.events)}
             </div>
-            
+
         </div>
     )
 }

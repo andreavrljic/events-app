@@ -23,10 +23,9 @@ const Header =(props)=>{
     return(
     <header className="header">
         <div className='headerContainer'>
-            <div>User: {user.name}</div>
-            <div>Email: {user.email}</div>
+            <h3 className="headerLabel">User: {user.name}</h3>
+            <h3 className="headerLabel">Email: {user.email}</h3>
             <div className="buttonGroup">
-            {/* <button type="button" className="button" onClick={() => props.addEvent()}> Add New Event</button> */}
             <GoogleLogout
                     clientId={key.CLIENT_ID}
                     buttonText='LOGOUT'

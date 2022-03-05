@@ -36,12 +36,11 @@ const EventBlock  = (props) => {
 
     return (
         <div className="rowEvent" id={props.id}>
-            <div className="summary">{event.summary}</div>
-            <div className="startDate">{getDate(event.start.dateTime, event.summary)}</div>
-            <div className="startTime">Start: {getTime(event.start.dateTime)}</div>
-            <div className="endTime">End: {getTime(event.end.dateTime)}</div>
+            <h4 className="summary">{event.summary}</h4>
+            <h5 className="startDate">{getDate(event.start.dateTime, event.summary)}</h5>
+            <h5 className="startTime">Start:{getTime(event.start.dateTime)}</h5>
+            <h5 className="endTime">End: {getTime(event.end.dateTime)}</h5>
             <FontAwesomeIcon className ="deleteIcon" icon={faCalendarMinus} onClick={() => props.deleteEvent(event.id)} />
-
         </div>
     )
 }
