@@ -11,10 +11,11 @@
 
 }
 .summary{
-    /* background-color: antiquewhite; */
+    
     inline-size: 50%;
     padding-left: 5%;
     min-width:fit-content;
+    text-transform: uppercase;
 
 }
 
@@ -24,11 +25,16 @@
     margin: 15px 20px 15px 20px
 }
 
-.endDate{
-    inline-size: 20%;
+.startTime{
+    inline-size: 10%;
     min-width:fit-content
-
 }
+
+.endTime{
+    inline-size: 10%;
+    min-width:fit-content
+}
+
 
 .tableContainer{
     margin: 10px 20px 10px 20px;
@@ -40,3 +46,11 @@
     width:10%;
 }
 
+.addNew{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}

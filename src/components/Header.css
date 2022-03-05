@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content:space-evenly;
     background-color:  rgb(247, 95, 72);
-    height: 80px;
+    height: fit-content;
     width: fill;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     flex-wrap: wrap;
@@ -28,6 +28,24 @@
     padding: 10px;
 }
 
-.formModal{
+.form-group{
+    align-content: center;
+    display: flex;
+    vertical-align: middle;
     align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.30) 0px 1px 4px;
+}
+
+.label{
+    min-width:fit-content; 
+    margin: 5px;
+    text-align: center;
+}
+
+.save{
+    margin-right: 10px;
 }

@@ -1,9 +1,8 @@
 import './Header.css'
 import key from '../keys.json'
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
-import ModalWindow from './ModalWindow';
+import NewEvent from './NewEvent';
 import { useState } from 'react';
-import Modal from 'react-modal/lib/components/Modal';
 
 const Header =(props)=>{
 
@@ -27,7 +26,7 @@ const Header =(props)=>{
             <div>User: {user.name}</div>
             <div>Email: {user.email}</div>
             <div className="buttonGroup">
-            <button type="button" className="button" onClick={() => setOpen(true)}> Add New Event</button>
+            {/* <button type="button" className="button" onClick={() => props.addEvent()}> Add New Event</button> */}
             <GoogleLogout
                     clientId={key.CLIENT_ID}
                     buttonText='LOGOUT'
@@ -39,23 +38,8 @@ const Header =(props)=>{
                             LOGOUT</button> 
                       )}
             /></div>
-            <Modal 
-                isOpen={open} 
-                ariaHideApp={false}
-                centered
-                size="lg"
-                closeModal={closeModal}
-                style={{
-                    position: "absolute",
-                    top: "40%",
-                    left: "50%",
-                    marginTop: "-50px",
-                    marginLeft: "-50px"
-                }}
-                >
-                <ModalWindow add={props.addEvent} close={closeModal}/>
-            </Modal>
         </div>
+        
          </header>
     )
 
