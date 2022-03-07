@@ -48,5 +48,7 @@
 .headerLabel{
     color: whitesmoke; 
     text-shadow: 2px 2px 6px black;
+    padding-left: 10px;
+    padding-right: 10px;
 
 }

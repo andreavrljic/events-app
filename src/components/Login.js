@@ -1,46 +1,90 @@
-// import GoogleLogin from 'react-google-login';
-// import key from '../keys.json'
-// import { useHistory } from 'react-router-dom';
-// import * as funct from './helpers/getData'
-// import { useState } from 'react';
+import GoogleLogin from 'react-google-login';
+import key from '../keys.json'
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 
 
-// const Login = (props) => {
+const Login = () => {
 
-//     let history = useHistory();     
+    var gapi = window.gapi
+    let history = useHistory();
 
-    
-//     const onFailure = () => {
-//         console.log("Login failed!")
-        
-        
-//     }
-    
-//       const onSuccess =(e) => {
-//         console.log("Login success!", e)
-//         console.log(props)
-//         props.change(true)
-//         // history.push("/events") 
-//         // await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events')
-//         // .then(response => response.json())
-//         // .then(data => console.log(data)); 
-//     }
+    const [defaultDays, setDefaultDays] = useState(7);
 
-//     return(
-//         <div className='container'>
-//             <GoogleLogin
-//                 clientId={key.CLIENT_ID}
-//                 buttonText='LOGIN'
-//                 onSuccess={(e) => onSuccess(e)}
-//                 onFailure={onFailure}
-//                 cookiePolicy={'single_host_origin'}
-//                 // isSignedIn={true}
-//                 // redirectUri={"/1"}
-//             />
-//             <button onClick={() => {}/*funct.getData()*/}>Get data</button>
-//         </div>
-//     )
-    
+    const calendarId = "primary";
 
-// }
-// export default Login
+    const addDays = (number) => {
+
+        var result = new Date();
+        return new Date(result.setDate(result.getDate() + number)).toISOString();
+
+    }
+
+    const listOfEvents = (numDays) => {
+
+        if (numDays) setDefaultDays(numDays)
+        let today = new Date().toISOString();
+        const timeZone = "Europe%2FBelgrade"
+        let maxDays = addDays(numDays ? numDays : defaultDays)
+
+        gapi.load("client:auth2", () => {
+            fetch(
+                `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${key.API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    },
+                }
+            )
+                .then((res) => {
+                    if (res.status !== 401) {
+                        return res.json();
+                    } else {
+                        localStorage.removeItem("accessToken");
+                    }
+                })
+                .then(async (data) => {
+                    if (data?.items) {
+                        history.push({ pathname: '/events', state: data })
+                    }
+                });
+        })
+    }
+
+
+    const onFailure = () => {
+        console.log("Login failed!")
+    }
+
+    const onSuccessLogin = async (e) => {
+
+        if (e.accessToken) {
+            window.localStorage.setItem("userName", e.profileObj.familyName + " " + e.profileObj.givenName)
+            window.localStorage.setItem("userEmail", e.profileObj.email)
+            window.localStorage.setItem("accessToken", e.accessToken)
+            listOfEvents();
+        }
+    }
+
+    return (
+        <div className='container'>
+            <GoogleLogin
+                clientId={key.CLIENT_ID}
+                buttonText='LOGIN'
+                onSuccess={(e) => onSuccessLogin(e)}
+                onFailure={() => onFailure()}
+                cookiePolicy={'single_host_origin'}
+                prompt="select_account"
+                render={renderProps => (
+                    <button onClick={renderProps.onClick}
+                        className="button"
+                    >
+                        LOGIN</button>
+                )}
+            />
+        </div>
+    )
+
+
+}
+export default Login

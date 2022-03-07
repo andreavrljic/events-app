@@ -1,32 +1,22 @@
 import './App.css';
-import EventsList from './components/EventsList';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import {useState} from 'react'
 import Main from './components/Main'
+import Login from './components/Login';
 
 
-const App =()=> { 
-  
+const App = () => {
+
   return (
-    // <div onClick={()=>console.log("i am inside")}>
-    //   Click me to check   
-    //   <Main/> 
-    // </div>
-
-    // <div>
-    //   {console.log(signedIn)}
-    //   {!signedIn ? <Login change ={setSignedIn } signedIn ={signedIn}/> : <Logout change ={setSignedIn}  signedIn ={signedIn}/>} 
-    // </div>
     <BrowserRouter>
-        <Switch>
-          <Route path="/events">
-            <EventsList/>
-          </Route>
-          <Route exact path="/">
-            <Main/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route path="/events">
+          <Main />
+        </Route>
+        <Route exact path="/">
+          <Login />
+        </Route>
+      </Switch>
+    </BrowserRouter>
 
   );
 }
