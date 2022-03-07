@@ -30,7 +30,7 @@ const Main = () => {
   const addDays = (number) => {
 
     var result = new Date();
-    return new Date(result.setDate(result.getDate() + number)).toISOString();
+    return new Date(new Date(result.setDate(result.getDate() + number)).setHours(0,0,0,0)).toISOString();
 
   }
 
@@ -40,7 +40,7 @@ const Main = () => {
 
     let today = new Date().toISOString();
     const timeZone = "Europe%2FBelgrade"
-    let maxDays = addDays(defaultDays)
+    let maxDays = addDays(numDays ? numDays: defaultDays)
 
     gapi.load("client:auth2", () => {
       fetch(

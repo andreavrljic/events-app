@@ -2,6 +2,7 @@ import GoogleLogin from 'react-google-login';
 import key from '../keys.json'
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
+import './Login.css'
 
 
 const Login = () => {
@@ -52,8 +53,9 @@ const Login = () => {
     }
 
 
-    const onFailure = () => {
-        console.log("Login failed!")
+    const onFailure = (e) => {
+        console.log("Login failed!", e)
+        alert("Login failed")
     }
 
     const onSuccessLogin = async (e) => {
@@ -67,21 +69,25 @@ const Login = () => {
     }
 
     return (
-        <div className='container'>
-            <GoogleLogin
-                clientId={key.CLIENT_ID}
-                buttonText='LOGIN'
-                onSuccess={(e) => onSuccessLogin(e)}
-                onFailure={() => onFailure()}
-                cookiePolicy={'single_host_origin'}
-                prompt="select_account"
-                render={renderProps => (
-                    <button onClick={renderProps.onClick}
-                        className="button"
-                    >
-                        LOGIN</button>
-                )}
-            />
+        <div className='loginPage-container'>
+            <div className="loginForm">
+                <h1>LOGIN TO SEE YOUR EVENT LIST</h1>
+                <GoogleLogin
+                    clientId={key.CLIENT_ID}
+                    buttonText='LOGIN'
+                    onSuccess={(e) => onSuccessLogin(e)}
+                    onFailure={(e) => onFailure(e)}
+                    cookiePolicy={'single_host_origin'}
+                    prompt="select_account"
+                    render={renderProps => (
+                        <button onClick={renderProps.onClick}
+                            className="button"
+                        >
+                            LOGIN</button>
+                    )}
+                />
+            </div>
+
         </div>
     )
 
