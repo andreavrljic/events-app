@@ -79,6 +79,7 @@ const Login = () => {
                     onFailure={(e) => onFailure(e)}
                     cookiePolicy={'single_host_origin'}
                     prompt="select_account"
+                    scope={key.SCOPES}
                     render={renderProps => (
                         <button onClick={renderProps.onClick}
                             className="button"
