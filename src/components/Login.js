@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import './Login.css'
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+const CLIENT_ID= process.env.REACT_APP_CLIENT_ID
 
 const Login = () => {
 
@@ -30,7 +32,7 @@ const Login = () => {
 
         gapi.load("client:auth2", () => {
             fetch(
-                `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${key.API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
+                `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -73,7 +75,7 @@ const Login = () => {
             <div className="loginForm">
                 <h1>LOGIN TO SEE YOUR EVENT LIST</h1>
                 <GoogleLogin
-                    clientId={key.CLIENT_ID}
+                    clientId={CLIENT_ID}
                     buttonText='LOGIN'
                     onSuccess={(e) => onSuccessLogin(e)}
                     onFailure={(e) => onFailure(e)}

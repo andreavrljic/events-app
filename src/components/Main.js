@@ -8,6 +8,9 @@ import './Main.css'
 
 const Main = () => {
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
+  
   var gapi = window.gapi
   let history = useHistory();
   const location = useLocation();
@@ -44,7 +47,7 @@ const Main = () => {
 
     gapi.load("client:auth2", () => {
       fetch(
-        `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${key.API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
+        `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
