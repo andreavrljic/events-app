@@ -71,7 +71,9 @@ const Login = () => {
     }
 
     return (
+        
         <div className='loginPage-container'>
+
             <div className="loginForm">
                 <h1>LOGIN TO SEE YOUR EVENT LIST</h1>
                 <GoogleLogin

@@ -1,8 +1,9 @@
 import './Header.css'
-import key from '../keys.json'
 import { GoogleLogout } from 'react-google-login';
 
 const Header = (props) => {
+    
+    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
     let user = {
         name: window.localStorage.getItem("userName"),
@@ -16,7 +17,7 @@ const Header = (props) => {
                 <h3 className="headerLabel">Email: {user.email}</h3>
                 <div className="buttonGroup">
                     <GoogleLogout
-                        clientId={key.CLIENT_ID}
+                        clientId={CLIENT_ID}
                         buttonText='LOGOUT'
                         onLogoutSuccess={() => props.logout()}
                         render={renderProps => (

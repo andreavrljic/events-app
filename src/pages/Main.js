@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import key from '../keys.json'
-import EventsList from './EventsList';
-import Header from './Header'
+import EventsList from '../components/EventsList';
+import Header from '../components/Header'
 import './Main.css'
 
 
 const Main = () => {
 
   const API_KEY = process.env.REACT_APP_API_KEY;
-
   
   var gapi = window.gapi
   let history = useHistory();
@@ -137,7 +135,6 @@ const Main = () => {
       <div>
         <Header logout={onSuccessLogut} />
         <EventsList
-          // events={(events.items && events.items.length > 0) ? events : location.state}
           events={events.items ? events : location.state}
           listOfEvents={(days) => listOfEvents(days)}
           addEvent={(eventInfo) => addEvent(eventInfo)}
