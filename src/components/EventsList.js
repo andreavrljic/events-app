@@ -3,6 +3,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import NewEvent from './NewEvent';
 import './EventsList.css'
+import { faGgCircle } from '@fortawesome/free-brands-svg-icons';
 
 const EventsList = (props) => {
 
@@ -14,6 +15,14 @@ const EventsList = (props) => {
 
         props.deleteEvent(eventId);
     }
+
+    function rangeWeek (dateStr) {
+        if (!dateStr) dateStr = new Date().getTime();
+        var dt = new Date(dateStr);
+        dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+        dt = new Date(dt.getTime() - (dt.getDay() > 0 ? (dt.getDay() - 1) * 1000 * 60 * 60 * 24 : 6 * 1000 * 60 * 60 * 24));
+        return  `${dt.toLocaleDateString("de-DE")} - ${new Date(dt.getTime() + 1000 * 60 * 60 * 24 * 7 - 1).toLocaleDateString("de-DE")}`;
+     }
 
     const createDataList = (elementList) => {
         let currentList = elementList.items;
@@ -32,15 +41,15 @@ const EventsList = (props) => {
                 </div>
             })
         } else {
-
-
-            uniqueWeeks = [...new Set(currentList?.map(item => currentWeekNumber(new Date(item.start.dateTime))))]
-
+            let uniqueWeeks = [...new Set(currentList?.map(item => rangeWeek(new Date(item.start.dateTime))))]
+        
             return uniqueWeeks.map((week) => {
                 return <div key={week}>
-                    <h3 className="tableLabel">Week no.{week}</h3>
+                   
+                    <h3 className="tableLabel">{`${week}`}</h3>
                     {currentList?.map(element => {
-                        if (currentWeekNumber(new Date(element.start.dateTime)) === week)
+                  
+                        if (rangeWeek(new Date(element.start.dateTime))== week)
                             return <EventBlock eventDetails={element} key={element.id} deleteEvent={removeFromCalendar} />
                     })}
                 </div>
