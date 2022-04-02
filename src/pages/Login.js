@@ -1,58 +1,58 @@
 import GoogleLogin from 'react-google-login';
 import key from '../keys.json'
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+// import { useState } from 'react';
 import './Login.css'
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-const CLIENT_ID= process.env.REACT_APP_CLIENT_ID
+// const API_KEY = process.env.REACT_APP_API_KEY;
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 
 const Login = () => {
-
-    var gapi = window.gapi
+    // console.log(CLIENT_ID)
+    // var gapi = window.gapi
     let history = useHistory();
 
-    const [defaultDays, setDefaultDays] = useState(7);
+    // const [defaultDays, setDefaultDays] = useState(7);
 
-    const calendarId = "primary";
+    // const calendarId = "primary";
 
-    const addDays = (number) => {
+    // const addDays = (number) => {
 
-        var result = new Date();
-        return new Date(result.setDate(result.getDate() + number)).toISOString();
+    //     var result = new Date();
+    //     return new Date(result.setDate(result.getDate() + number)).toISOString();
 
-    }
+    // }
 
-    const listOfEvents = (numDays) => {
+    // const listOfEvents = (numDays) => {
 
-        if (numDays) setDefaultDays(numDays)
-        let today = new Date().toISOString();
-        const timeZone = "Europe%2FBelgrade"
-        let maxDays = addDays(numDays ? numDays : defaultDays)
+    //     if (numDays) setDefaultDays(numDays)
+    //     let today = new Date().toISOString();
+    //     const timeZone = "Europe%2FBelgrade"
+    //     let maxDays = addDays(numDays ? numDays : defaultDays)
 
-        gapi.load("client:auth2", () => {
-            fetch(
-                `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    },
-                }
-            )
-                .then((res) => {
-                    if (res.status !== 401) {
-                        return res.json();
-                    } else {
-                        localStorage.removeItem("accessToken");
-                    }
-                })
-                .then(async (data) => {
-                    if (data?.items) {
-                        history.push({ pathname: '/events', state: data })
-                    }
-                });
-        })
-    }
+    //     gapi.load("client:auth2", () => {
+    //         fetch(
+    //             `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${today}&timeMax=${maxDays}&timeZone=${timeZone}`,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    //                 },
+    //             }
+    //         )
+    //             .then((res) => {
+    //                 if (res.status !== 401) {
+    //                     return res.json();
+    //                 } else {
+    //                     localStorage.removeItem("accessToken");
+    //                 }
+    //             })
+    //             .then(async (data) => {
+    //                 if (data?.items) {
+    //                     history.push({ pathname: '/events', state: data })
+    //                 }
+    //             });
+    //     })
+    // }
 
 
     const onFailure = (e) => {
@@ -66,12 +66,12 @@ const Login = () => {
             window.localStorage.setItem("userName", e.profileObj.familyName + " " + e.profileObj.givenName)
             window.localStorage.setItem("userEmail", e.profileObj.email)
             window.localStorage.setItem("accessToken", e.accessToken)
-            listOfEvents();
+            history.push({ pathname: '/events', state: "data" })
         }
     }
 
     return (
-        
+
         <div className='loginPage-container'>
 
             <div className="loginForm">

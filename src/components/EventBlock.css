@@ -1,52 +1,54 @@
-.rowEvent{
+.rowEvent {
 
-    justify-self:center;
+    justify-self: center;
     display: flex;
     justify-content: space-between;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     height: 50px;
     align-items: center;
     min-width: max-content;
-    
+    margin: 3px 0 3px 0;
+
 
 }
-.summary{
-    
+
+.summary {
+
     inline-size: 50%;
     padding-left: 5%;
-    min-width:fit-content;
+    min-width: fit-content;
     text-transform: uppercase;
 
 }
 
-.startDate{
+.startDate {
     inline-size: 20%;
-    min-width:fit-content;
+    min-width: fit-content;
     margin: 15px 20px 15px 20px
 }
 
-.startTime{
+.startTime {
     inline-size: 10%;
-    min-width:fit-content
+    min-width: fit-content
 }
 
-.endTime{
+.endTime {
     inline-size: 10%;
-    min-width:fit-content
+    min-width: fit-content
 }
 
 
-.tableContainer{
+.tableContainer {
     margin: 10px 20px 10px 20px;
     min-width: 1000px;
-    min-width:max-content;
+    min-width: max-content;
 }
 
-.deleteIcon{
-    width:10%;
+.deleteIcon {
+    width: 10%;
 }
 
-.addNew{
+.addNew {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

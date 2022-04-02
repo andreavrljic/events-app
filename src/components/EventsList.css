@@ -1,8 +1,13 @@
-.tableList{
+.tableList {
     margin-top: 20px;
 }
 
-.tableLabel{
-    color: lightgray; 
+.tableLabel {
+    color: lightgray;
     text-shadow: 1px 1px 3px black;
+}
+
+.selectedDays {
+    background: darkgray;
+    color: white;
 }

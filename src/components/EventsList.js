@@ -30,8 +30,8 @@ const EventsList = (props) => {
             return uniqueDays.map((day) => {
                 return <div key={day}>
                     <h3 className="tableLabel">{new Date(day).toLocaleDateString("de-DE")}</h3>
-                    {currentList?.filter(element =>new Date(element.start.dateTime).toLocaleDateString() === day)
-                    .map(element => <EventBlock eventDetails={element} key={element.id} deleteEvent={removeFromCalendar} />) 
+                    {currentList?.filter(element => new Date(element.start.dateTime).toLocaleDateString() === day)
+                        .map(element => <EventBlock eventDetails={element} key={element.id} deleteEvent={removeFromCalendar} />)
                     }
                 </div>
             })

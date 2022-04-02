@@ -8,12 +8,13 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.button{
+.button {
   background-color: gray;
   color: white;
   border-radius: 4px;
@@ -22,9 +23,8 @@
   width: 100px;
 }
 
-.button:hover{
+.button:hover {
   background-color: whitesmoke;
   color: black;
   box-shadow: 0 1px 3px 3px lightgray;
 }
-
