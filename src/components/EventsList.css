@@ -1,8 +1,26 @@
-.tableList{
+.tableList {
     margin-top: 20px;
 }
 
-.tableLabel{
-    color: lightgray; 
+.tableLabel {
+    color: lightgray;
     text-shadow: 1px 1px 3px black;
+}
+
+.selectedDaysButton {
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 1px;
+    min-width: 50px;
+}
+
+.buttonSmall {
+    background-color: gray;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 1px;
+    min-width: 50px;
 }

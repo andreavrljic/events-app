@@ -58,9 +58,9 @@ const EventsList = (props) => {
         <div className="tableContainer">
             <NewEvent addEvent={(eventInfo) => props.addEvent(eventInfo)} />
             <ButtonGroup variant="outlined" aria-label="outlined button group">
-                <Button className="buttonSmall" onClick={() => { props.listOfEvents(1) }}>1</Button>
-                <Button className="buttonSmall" onClick={() => { props.listOfEvents(7) }}>7</Button>
-                <Button className="buttonSmall" onClick={() => { props.listOfEvents(30) }}>30</Button>
+                <Button className={props.defaultDays == 1 ? "selectedDaysButton" : "buttonSmall"} onClick={() => { props.listOfEvents(1) }}>1</Button>
+                <Button className={props.defaultDays == 7 ? "selectedDaysButton" : "buttonSmall"} onClick={() => { props.listOfEvents(7) }}>7</Button>
+                <Button className={props.defaultDays == 30 ? "selectedDaysButton" : "buttonSmall"} onClick={() => { props.listOfEvents(30) }}>30</Button>
             </ButtonGroup>
             <div className='tableList'>
                 {createDataList(props.events)}
