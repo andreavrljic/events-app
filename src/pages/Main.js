@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import EventsList from '../components/EventsList';
 import Header from '../components/Header'
@@ -8,7 +8,6 @@ import './Main.css'
 const Main = () => {
 
   const API_KEY = process.env.REACT_APP_API_KEY;
-  
   var gapi = window.gapi
   let history = useHistory();
   const location = useLocation();
@@ -18,6 +17,12 @@ const Main = () => {
 
   const calendarId = "primary";
 
+  useEffect(() => {
+
+    listOfEvents()
+
+  }, [])
+
 
   const onSuccessLogut = () => {
     console.log("Logout success!")
@@ -25,13 +30,14 @@ const Main = () => {
     window.localStorage.removeItem("firstData");
     window.localStorage.removeItem("userName")
     window.localStorage.removeItem("userEmail")
+
     history.push("/")
   }
 
   const addDays = (number) => {
 
     var result = new Date();
-    return new Date(new Date(result.setDate(result.getDate() + number)).setHours(0,0,0,0)).toISOString();
+    return new Date(new Date(result.setDate(result.getDate() + number)).setHours(0, 0, 0, 0)).toISOString();
 
   }
 
@@ -41,7 +47,7 @@ const Main = () => {
 
     let today = new Date().toISOString();
     const timeZone = "Europe%2FBelgrade"
-    let maxDays = addDays(numDays ? numDays: defaultDays)
+    let maxDays = addDays(numDays ? numDays : defaultDays)
 
     gapi.load("client:auth2", () => {
       fetch(
@@ -53,10 +59,11 @@ const Main = () => {
         }
       )
         .then((res) => {
-          if (res.status !== 401) {
+          if (res.ok) {
             return res.json();
           } else {
             localStorage.removeItem("accessToken");
+            console.log(res.status)
           }
         })
         .then((data) => {
@@ -131,6 +138,7 @@ const Main = () => {
 
 
   return (
+
     <div className='container'>
       <div>
         <Header logout={onSuccessLogut} />
@@ -146,3 +154,4 @@ const Main = () => {
 
 }
 export default Main;
+

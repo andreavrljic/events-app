@@ -1,28 +1,28 @@
 .header {
     display: inline-flex;
     flex-direction: row;
-    justify-content:space-evenly;
-    background-color:  rgb(247, 95, 72);
+    justify-content: space-evenly;
+    background-color: rgb(247, 95, 72);
     height: fit-content;
     width: fill;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     flex-wrap: wrap;
     align-content: center;
-    min-width:max-content;
-    
+    min-width: max-content;
+
 }
 
-.headerContainer{
+.headerContainer {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     display: flex;
     width: 100%;
     padding: 30px;
-    
+
 }
 
 
-.form-group{
+.form-group {
     align-content: center;
     display: flex;
     vertical-align: middle;
@@ -35,19 +35,19 @@
     width: 100%;
 }
 
-.label{
-    min-width:fit-content; 
+.label {
+    min-width: fit-content;
     margin: 5px;
     text-align: center;
     font-weight: 500;
 }
 
-.save{
+.save {
     margin-right: 10px;
 }
 
-.headerLabel{
-    color: whitesmoke; 
+.headerLabel {
+    color: whitesmoke;
     text-shadow: 2px 2px 6px black;
     padding-left: 10px;
     padding-right: 10px;
